@@ -19,7 +19,7 @@ void mat_free(matrix_t *m)
     free(m);
 }
 
-size_t _mat_get_row_maj_index(matrix_t *m, size_t row, size_t col)
+size_t _mat_get_col_maj_index(matrix_t *m, size_t row, size_t col)
 {
     size_t index = ((m->n_rows * col) + row) * sizeof(float);
     return index;
@@ -27,7 +27,7 @@ size_t _mat_get_row_maj_index(matrix_t *m, size_t row, size_t col)
 
 float mat_get(matrix_t *m, size_t row, size_t col)
 {
-    int index = _mat_get_row_maj_index(m, row, col);
+    int index = _mat_get_col_maj_index(m, row, col);
     float *valptr = m->data + index;
     float value = *valptr;
     return value;
@@ -35,7 +35,7 @@ float mat_get(matrix_t *m, size_t row, size_t col)
 
 void mat_set(matrix_t *m, size_t row, size_t col, float value)
 {
-    int index = _mat_get_row_maj_index(m, row, col);
+    int index = _mat_get_col_maj_index(m, row, col);
     float *valptr = m->data + index;
     *valptr = value;
 }
